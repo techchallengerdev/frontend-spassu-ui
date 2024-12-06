@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,16 +25,20 @@ import { AuthorService } from '../../../core/services/author.service';
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   template: `
     <div class="container mt-4">
-      <h1>{{isEditing ? 'Edit' : 'Create'}} Author</h1>
-      
+      <h1>{{ isEditing ? 'Edit' : 'Create' }} Author</h1>
+
       <form [formGroup]="authorForm" (ngSubmit)="onSubmit()" class="mt-4">
         <mat-form-field class="w-100 mb-3">
           <mat-label>First Name</mat-label>
-          <input matInput formControlName="firstName" placeholder="First name">
+          <input
+            matInput
+            formControlName="firstName"
+            placeholder="First name"
+          />
           <mat-error *ngIf="authorForm.get('firstName')?.hasError('required')">
             First name is required
           </mat-error>
@@ -37,7 +46,7 @@ import { AuthorService } from '../../../core/services/author.service';
 
         <mat-form-field class="w-100 mb-3">
           <mat-label>Last Name</mat-label>
-          <input matInput formControlName="lastName" placeholder="Last name">
+          <input matInput formControlName="lastName" placeholder="Last name" />
           <mat-error *ngIf="authorForm.get('lastName')?.hasError('required')">
             Last name is required
           </mat-error>
@@ -45,7 +54,12 @@ import { AuthorService } from '../../../core/services/author.service';
 
         <mat-form-field class="w-100 mb-3">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" type="email" placeholder="Email">
+          <input
+            matInput
+            formControlName="email"
+            type="email"
+            placeholder="Email"
+          />
           <mat-error *ngIf="authorForm.get('email')?.hasError('required')">
             Email is required
           </mat-error>
@@ -56,8 +70,15 @@ import { AuthorService } from '../../../core/services/author.service';
 
         <mat-form-field class="w-100 mb-3">
           <mat-label>Birth Date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="birthDate">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="birthDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <mat-error *ngIf="authorForm.get('birthDate')?.hasError('required')">
             Birth date is required
@@ -66,18 +87,30 @@ import { AuthorService } from '../../../core/services/author.service';
 
         <mat-form-field class="w-100 mb-3">
           <mat-label>Biography</mat-label>
-          <textarea matInput formControlName="biography" placeholder="Author biography" rows="4"></textarea>
+          <textarea
+            matInput
+            formControlName="biography"
+            placeholder="Author biography"
+            rows="4"
+          ></textarea>
         </mat-form-field>
 
         <div class="d-flex gap-2 mt-4">
-          <button mat-raised-button color="primary" type="submit" [disabled]="authorForm.invalid || isSubmitting">
-            {{isEditing ? 'Update' : 'Create'}} Author
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="authorForm.invalid || isSubmitting"
+          >
+            {{ isEditing ? 'Update' : 'Create' }} Author
           </button>
-          <button mat-button type="button" routerLink="/authors">Cancel</button>
+          <button mat-button type="button" routerLink="/v1/autores">
+            Cancel
+          </button>
         </div>
       </form>
     </div>
-  `
+  `,
 })
 export class AuthorFormComponent implements OnInit {
   authorForm: FormGroup;
@@ -95,7 +128,7 @@ export class AuthorFormComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       birthDate: ['', Validators.required],
-      biography: ['']
+      biography: [''],
     });
   }
 
@@ -105,7 +138,7 @@ export class AuthorFormComponent implements OnInit {
       this.isEditing = true;
       this.authorService.getById(id).subscribe({
         next: (author) => this.authorForm.patchValue(author),
-        error: (error) => console.error('Error loading author:', error)
+        error: (error) => console.error('Error loading author:', error),
       });
     }
   }
@@ -121,12 +154,12 @@ export class AuthorFormComponent implements OnInit {
 
       operation.subscribe({
         next: () => {
-          this.router.navigate(['/authors']);
+          this.router.navigate(['/v1/autores']);
         },
         error: (error) => {
           console.error('Error saving author:', error);
           this.isSubmitting = false;
-        }
+        },
       });
     }
   }

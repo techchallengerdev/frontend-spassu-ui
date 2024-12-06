@@ -7,11 +7,11 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 # Configurações
-GIT_REPO_URL="git@github.com:techchallengerdev/desafio-spassu.git"
+GIT_REPO_URL="git@github.com:techchallengerdev/frontend-spassu-ui.git"
 SSH_KEY_PATH="$HOME/.ssh/id_ed25519_tech_challenge_spassu"
 EMAIL="techchallengerspassu@gmail.com"
 BRANCH="main"
-COMMIT_MESSAGE="feat: initial estrutura"
+COMMIT_MESSAGE="feat: atualização para tratamento de mensagem negocial junto ao resource /livros e demonstrar como a arquitetura está manutenível e estável"
 
 # Função para log
 log() {

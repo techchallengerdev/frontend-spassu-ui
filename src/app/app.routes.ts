@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'books',
+    path: 'v1/livros',
     children: [
       {
         path: '',
@@ -35,7 +35,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'authors',
+    path: 'v1/autores',
     children: [
       {
         path: '',
@@ -67,9 +67,9 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: '/books', pathMatch: 'full' },
+  { path: '', redirectTo: 'v1/livros', pathMatch: 'full' },
   {
-    path: 'subjects',
+    path: 'v1/assuntos',
     children: [
       {
         path: '',
@@ -101,5 +101,5 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: '/books', pathMatch: 'full' },
+  { path: '', redirectTo: 'v1/livros', pathMatch: 'full' },
 ];

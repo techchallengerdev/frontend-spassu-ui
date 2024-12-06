@@ -63,3 +63,12 @@ $theme: mat.define-light-theme(
 .mat-mdc-form-field {
   width: 100%;
 }
+
+.error-snackbar {
+  background: #f44336;
+  color: white;
+
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+}

@@ -4,35 +4,37 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { SubjectService } from '../../../core/services/subject.service';
-import { Subject } from '../../../shared/interfaces/subject.interface';
+import { Subject } from 'src/app/shared/interfaces/subject.interface';
 
 @Component({
   selector: 'app-subject-detail',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatCardModule,
-    MatButtonModule
-  ],
+  imports: [CommonModule, RouterModule, MatCardModule, MatButtonModule],
   template: `
     <div class="container mt-4">
       <mat-card *ngIf="subject">
         <mat-card-header>
-          <mat-card-title>{{subject.name}}</mat-card-title>
-          <mat-card-subtitle *ngIf="subject.parentSubject">Parent: {{subject.parentSubject}}</mat-card-subtitle>
+          <mat-card-title>{{ subject.name }}</mat-card-title>
+          <mat-card-subtitle *ngIf="subject.parentSubject"
+            >Parent: {{ subject.parentSubject }}</mat-card-subtitle
+          >
         </mat-card-header>
         <mat-card-content>
           <p><strong>Description:</strong></p>
-          <p>{{subject.description}}</p>
+          <p>{{ subject.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button [routerLink]="['/subjects', subject.id, 'edit']">EDIT</button>
-          <button mat-button routerLink="/subjects">BACK</button>
+          <button
+            mat-button
+            [routerLink]="['/v1/assuntos', subject.id, 'edit']"
+          >
+            EDIT
+          </button>
+          <button mat-button routerLink="/v1/assuntos">BACK</button>
         </mat-card-actions>
       </mat-card>
     </div>
-  `
+  `,
 })
 export class SubjectDetailComponent implements OnInit {
   subject?: Subject;
@@ -46,8 +48,8 @@ export class SubjectDetailComponent implements OnInit {
     const id = this.route.snapshot.params['id'];
     if (id) {
       this.subjectService.getById(id).subscribe({
-        next: (subject) => this.subject = subject,
-        error: (error) => console.error('Error loading subject:', error)
+        next: (subject) => (this.subject = subject),
+        error: (error) => console.error('Error loading subject:', error),
       });
     }
   }
